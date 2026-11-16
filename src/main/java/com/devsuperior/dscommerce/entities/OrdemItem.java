@@ -20,6 +20,9 @@ public class OrdemItem {
         this.price = price;
     }
 
+    public OrdemItem() {
+    }
+
     public Order getOrder(){
         return this.id.getOrder();
     }

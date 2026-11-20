@@ -4,6 +4,8 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "tb_ordem_Item")
 public class OrdemItem {
@@ -53,5 +55,17 @@ public class OrdemItem {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        OrdemItem ordemItem = (OrdemItem) o;
+        return Objects.equals(id, ordemItem.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
     }
 }

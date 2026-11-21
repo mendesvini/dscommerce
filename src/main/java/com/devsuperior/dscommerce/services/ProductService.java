@@ -37,4 +37,25 @@ public class ProductService {
         product.setPrice(produtcDto.getPrice());
         product.setImgUrl(produtcDto.getImgUrl());
     }
+
+    @Transactional
+    public ProductDto inserirDados(ProductDto produtcDto){
+        Product product = new Product();
+        tranferirDados(produtcDto,product);
+        product = productRepository.save(product);
+        return new ProductDto(product);
+    }
+
+    @Transactional
+    public ProductDto atualizarDados(Long id,ProductDto produtcDto){
+        Product product = productRepository.getReferenceById(id);
+        tranferirDados(produtcDto,product);
+        product =  productRepository.save(product);
+        return new ProductDto(product);
+    }
+
+    @Transactional
+    public void deletarDados(Long id){
+        productRepository.deleteById(id);
+    }
 }

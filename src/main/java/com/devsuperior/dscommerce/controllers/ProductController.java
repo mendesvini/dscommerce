@@ -4,6 +4,7 @@ package com.devsuperior.dscommerce.controllers;
 import com.devsuperior.dscommerce.dto.ProductDto;
 import com.devsuperior.dscommerce.entities.Product;
 import com.devsuperior.dscommerce.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +34,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> createProduct(@Valid  @RequestBody ProductDto productDto) {
         productDto = productService.inserirDados(productDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
                 buildAndExpand(productDto.getId()).toUri();
@@ -41,7 +42,7 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDto> updateProduct(@PathVariable  Long id,@RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable  Long id,@Valid @RequestBody ProductDto productDto) {
         productDto = productService.atualizarDados(id, productDto);
         return ResponseEntity.ok(productDto);
     }
